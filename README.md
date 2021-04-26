@@ -24,14 +24,14 @@ Specifying the working directory will cause everything to be dumped there:
 
 After running this you could expect the following files to be present in there:
 
-* vpn.example.com.conf
-* crl.pem
-* clients.db
+* `vpn.example.com.conf`
+* `crl.pem`
+* `clients.db`
 
 It will also create the client config directory in there so any clients created will have the
 IP address assigned per file.
 
-* ccd/bob@example.com
+* `ccd/bob@example.com`
 
 ## REST Endpoints
 
@@ -76,3 +76,4 @@ Regenerate the CRL file on disk.
 - [ ] load server template from working directory
 - [ ] allow regeneration of server config
 - [ ] load client template from working directory
+- [ ] create debian package with systemd service
