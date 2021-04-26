@@ -48,9 +48,10 @@ func main() {
 		}
 	}
 
+	// TODO allow specifying the public IP address of the server
 	flag.StringVar(&addr, "a", "127.0.0.1:5555", "IP and port to run on")
-	flag.StringVar(&dbfile, "db", "foo.db", "path to the ovpn-tool database")
-	flag.StringVar(&dn, "d", "vpn.example.com", "domain name of the VPN server to create clients against")
+	flag.StringVar(&dbfile, "db", path.Join(wd, "clients.db"), "path to the ovpn-tool database")
+	flag.StringVar(&dn, "d", "", "domain name of the VPN server to create clients against")
 	flag.StringVar(&vpnSubnet, "s", "10.43.0.0/16", "subnet of the VPN")
 	flag.StringVar(&serverIP, "gw", "10.43.0.1", "IP of the VPN Gateway")
 	flag.StringVar(&ccdPath, "ccd", path.Join(wd, "ccd"), "domain name of the VPN server to create clients against")
