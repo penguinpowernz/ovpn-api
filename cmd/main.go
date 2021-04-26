@@ -6,7 +6,6 @@ import (
 	"log"
 	"net"
 	"os"
-	"os/exec"
 	"path"
 	"time"
 
@@ -39,10 +38,8 @@ func init() {
 }
 
 func main() {
-	var db, addr, dn, toolPath, serverCRL, ccdPath, serverIP, vpnSubnet, wd string
+	var db, addr, dn, serverCRL, ccdPath, serverIP, vpnSubnet, wd string
 	var crlValidity int
-
-	toolPath, _ = exec.LookPath("ovpn-tool") // try to populate the default if we can
 
 	if wd == "" {
 		wd, _ = os.Getwd()
@@ -73,14 +70,6 @@ func main() {
 	fatalIfNotFound(serverCRL)
 	fatalIfNotFound(ccdPath)
 	fatalIfNotFound(db)
-
-	if toolPath == "" {
-		var err error
-		toolPath, err = exec.LookPath("ovpn-tool")
-		if err != nil {
-			log.Fatalf("couldn't find ovpn-tool in the $PATH")
-		}
-	}
 
 	p := pki.Config{Passwd: password}
 	ca, err := pki.New(&p, db, false)
@@ -140,7 +129,7 @@ func createServerConfig(ca *pki.CA, dn string) (*pki.Cert, []byte, error) {
 	}
 	ci.Subject.CommonName = dn
 
-	// TODO: add private key password
+	// TODO: add private key password if wanted
 	crt, err := ca.NewServerCert(ci, "")
 	if err != nil {
 		return nil, []byte{}, err

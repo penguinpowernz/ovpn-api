@@ -31,6 +31,7 @@ func NewServer(wd, dbPath, domainName, serverCRLPath string, ccd ccd.CCD, crlVal
 		domainName:    domainName,
 		serverCRLPath: serverCRLPath,
 		ccd:           ccd,
+		CRLValidity:   crlValidity,
 		pkiapi:        pkirouter,
 		ca:            ca,
 		crt:           crt,
